@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Checker</title>
+</head>
+
+<body>
+    <span>Input Number: </span> <input type="text" name="" id="input"> <input type="button" id="btn" value="Check">
+    <br>
+    <span>Output: </span>
+    <p id="output"> </p>
+
+    <script>
+        var btn = document.getElementById('btn')
+        btn.onclick = showOutput
+        var userInputBox = document.getElementById('input')
+        userInputBox.onkeydown = function(eventObject) {
+            keyPressed = eventObject.keyCode
+            console.log(eventObject)
+            if (keyPressed >= 48 && keyPressed <= 57 || keyPressed >= 96 && keyPressed <= 105 && eventObject.shiftKey == false || keyPressed == 8 || keyPressed == 46){
+                return true
+            }
+            else {
+                return false
+            }
+            
+
+        }
+
+
+        function showOutput() {
+            
+            var outputElement = document.getElementById('output')
+
+            var number = parseInt(userInputBox.value)
+            if (userInputBox.value == "") {
+                alert("kuch toh likh!")
+            }
+            else if (isNaN(number) == true) {
+                outputElement.innerHTML = "<p style='color : red'>" + userInputBox.value + "</p>" + "is not a number."
+            }
+            else if (number < 0) {
+                    outputElement.innerHTML = "<p style='color : blue'>" + userInputBox.value + "</p>" + "is a negative number."
+                }
+                else {
+                    try {
+                        var isPrime = checkPrime(number)
+                        if (isPrime == true) {
+                            outputElement.innerHTML = "<p style='color : green'>" + userInputBox.value + "</p>" + "is a prime number."
+                        }
+                        else {
+                            outputElement.innerHTML = "<p style='color : red'>" + userInputBox.value + "</p>" + "is not a prime number."
+                        }
+                    } catch (error) {
+                        outputElement.innerText = "There is some error." + error
+                    }
+                }
+            }
+
+
+
+
+            function checkPrime(number) {
+                if (number <= 1) {
+                    return false
+                }
+                else {
+                    for (var i = 2; i < number; i++) {
+                        if (number % i == 0) {
+                            return false
+                        }
+
+                    }
+                    return true
+                }
+            }
+
+        
+
+
+    </script>
+
+</body>
+
+</html>
